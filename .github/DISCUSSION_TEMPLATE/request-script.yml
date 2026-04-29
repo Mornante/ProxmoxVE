@@ -28,7 +28,7 @@ body:
     options:
       - label: "I have searched existing [scripts](https://community-scripts.github.io/Proxmox/scripts) and found no duplicates."
         required: true
-      - label: "I have searched existing [discussions](https://github.com/community-scripts/ProxmoxVE/discussions?discussions_q=) and found no duplicate requests."
+      - label: "I have searched existing [discussions](https://github.com/Mornante/ProxmoxVE/discussions?discussions_q=) and found no duplicate requests."
         required: true
       - label: "The application requested has 600+ stars on Github (if applicable), is older than 6 months, actively maintained and has release tarballs published."
         required: true

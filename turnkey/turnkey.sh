@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 # Copyright (c) 2021-2026 community-scripts ORG
 # Author: tteck (tteckster)
-# License: MIT | https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
+# License: MIT | https://github.com/Mornante/ProxmoxVE/raw/main/LICENSE
 
 # Source shared libraries
-source <(curl -fsSL https://raw.githubusercontent.com/community-scripts/ProxmoxVE/main/misc/api.func)
-source <(curl -fsSL https://raw.githubusercontent.com/community-scripts/ProxmoxVE/main/misc/core.func)
-source <(curl -fsSL https://raw.githubusercontent.com/community-scripts/ProxmoxVE/main/misc/error_handler.func)
+source <(curl -fsSL https://raw.githubusercontent.com/Mornante/ProxmoxVE/main/misc/api.func)
+source <(curl -fsSL https://raw.githubusercontent.com/Mornante/ProxmoxVE/main/misc/core.func)
+source <(curl -fsSL https://raw.githubusercontent.com/Mornante/ProxmoxVE/main/misc/error_handler.func)
 load_functions
 catch_errors
 
@@ -161,7 +161,7 @@ shell_check
 root_check
 
 # Read diagnostics preference (same logic as build.func diagnostics_check)
-DIAG_CONFIG="/usr/local/community-scripts/diagnostics"
+DIAG_CONFIG="/usr/local/Mornante/diagnostics"
 if [[ -f "$DIAG_CONFIG" ]]; then
   DIAGNOSTICS=$(awk -F '=' '/^DIAGNOSTICS/ {print $2}' "$DIAG_CONFIG") || true
   DIAGNOSTICS="${DIAGNOSTICS:-no}"

@@ -2,7 +2,7 @@
 
 # Copyright (c) 2021-2026 community-scripts ORG
 # Author: tteck (tteckster) | Co-Author: MickLesk
-# License: MIT | https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
+# License: MIT | https://github.com/Mornante/ProxmoxVE/raw/main/LICENSE
 # Source: https://filebrowser.org/ | Github: https://github.com/filebrowser/filebrowser
 
 function header_info {
@@ -27,11 +27,11 @@ INFO="${BL}ℹ️${CL}"
 
 APP="FileBrowser"
 INSTALL_PATH="/usr/local/bin/filebrowser"
-DB_PATH="/usr/local/community-scripts/filebrowser.db"
+DB_PATH="/usr/local/Mornante/filebrowser.db"
 DEFAULT_PORT=8080
 
 # Telemetry
-source <(curl -fsSL https://raw.githubusercontent.com/community-scripts/ProxmoxVE/main/misc/api.func) 2>/dev/null || true
+source <(curl -fsSL https://raw.githubusercontent.com/Mornante/ProxmoxVE/main/misc/api.func) 2>/dev/null || true
 declare -f init_tool_telemetry &>/dev/null && init_tool_telemetry "filebrowser" "addon"
 
 # Get first non-loopback IP & Detect primary network interface dynamically
@@ -170,9 +170,9 @@ After=network-online.target
 [Service]
 User=root
 WorkingDirectory=/usr/local/community-scripts
-ExecStartPre=/bin/touch /usr/local/community-scripts/filebrowser.db
-ExecStartPre=/usr/local/bin/filebrowser config set -a "0.0.0.0" -p ${PORT} -d /usr/local/community-scripts/filebrowser.db
-ExecStart=/usr/local/bin/filebrowser -r / -d /usr/local/community-scripts/filebrowser.db -p ${PORT}
+ExecStartPre=/bin/touch /usr/local/Mornante/filebrowser.db
+ExecStartPre=/usr/local/bin/filebrowser config set -a "0.0.0.0" -p ${PORT} -d /usr/local/Mornante/filebrowser.db
+ExecStart=/usr/local/bin/filebrowser -r / -d /usr/local/Mornante/filebrowser.db -p ${PORT}
 Restart=always
 
 [Install]

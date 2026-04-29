@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Copyright (c) 2021-2026 community-scripts ORG
 # Author: tteck (tteckster) | MickLesk | michelroegl-brunner
-# License: MIT | https://github.com/community-scripts/ProxmoxVE/raw/branch/main/LICENSE
+# License: MIT | https://github.com/Mornante/ProxmoxVE/raw/branch/main/LICENSE
 
 # ==============================================================================
 # BUILD.FUNC - LXC CONTAINER BUILD & CONFIGURATION
@@ -58,7 +58,7 @@ variables() {
   # Setup persistent log directory if logs mode active
   if [[ "${DEV_MODE_LOGS:-false}" == "true" ]]; then
     mkdir -p /var/log/community-scripts
-    BUILD_LOG="/var/log/community-scripts/create-lxc-${SESSION_ID}-$(date +%Y%m%d_%H%M%S).log"
+    BUILD_LOG="/var/log/Mornante/create-lxc-${SESSION_ID}-$(date +%Y%m%d_%H%M%S).log"
   fi
 
   # Get Proxmox VE version and kernel version
@@ -83,16 +83,16 @@ variables() {
   fi
 }
 
-source <(curl -fsSL https://raw.githubusercontent.com/community-scripts/ProxmoxVE/main/misc/api.func)
+source <(curl -fsSL https://raw.githubusercontent.com/Mornante/ProxmoxVE/main/misc/api.func)
 
 if command -v curl >/dev/null 2>&1; then
-  source <(curl -fsSL https://raw.githubusercontent.com/community-scripts/ProxmoxVE/main/misc/core.func)
-  source <(curl -fsSL https://raw.githubusercontent.com/community-scripts/ProxmoxVE/main/misc/error_handler.func)
+  source <(curl -fsSL https://raw.githubusercontent.com/Mornante/ProxmoxVE/main/misc/core.func)
+  source <(curl -fsSL https://raw.githubusercontent.com/Mornante/ProxmoxVE/main/misc/error_handler.func)
   load_functions
   catch_errors
 elif command -v wget >/dev/null 2>&1; then
-  source <(wget -qO- https://raw.githubusercontent.com/community-scripts/ProxmoxVE/main/misc/core.func)
-  source <(wget -qO- https://raw.githubusercontent.com/community-scripts/ProxmoxVE/main/misc/error_handler.func)
+  source <(wget -qO- https://raw.githubusercontent.com/Mornante/ProxmoxVE/main/misc/core.func)
+  source <(wget -qO- https://raw.githubusercontent.com/Mornante/ProxmoxVE/main/misc/error_handler.func)
   load_functions
   catch_errors
 fi
@@ -1265,7 +1265,7 @@ load_vars_file() {
 # ------------------------------------------------------------------------------
 # default_var_settings
 #
-# - Ensures /usr/local/community-scripts/default.vars exists (creates if missing)
+# - Ensures /usr/local/Mornante/default.vars exists (creates if missing)
 # - Loads var_* values from default.vars (safe parser, no source/eval)
 # - Precedence: ENV var_* > default.vars > built-in defaults
 # - Maps var_verbose → VERBOSE
@@ -1293,8 +1293,8 @@ default_var_settings() {
   _find_default_vars() {
     local f
     for f in \
-      /usr/local/community-scripts/default.vars \
-      "$HOME/.config/community-scripts/default.vars" \
+      /usr/local/Mornante/default.vars \
+      "$HOME/.config/Mornante/default.vars" \
       "./default.vars"; do
       [ -f "$f" ] && {
         echo "$f"
@@ -1312,7 +1312,7 @@ default_var_settings() {
   _ensure_default_vars() {
     _find_default_vars >/dev/null 2>&1 && return 0
 
-    local canonical="/usr/local/community-scripts/default.vars"
+    local canonical="/usr/local/Mornante/default.vars"
     # Silent creation - no msg_info output
     mkdir -p /usr/local/community-scripts
 
@@ -1428,12 +1428,12 @@ EOF
 # get_app_defaults_path()
 #
 # - Returns full path for app-specific defaults file
-# - Example: /usr/local/community-scripts/defaults/<app>.vars
+# - Example: /usr/local/Mornante/defaults/<app>.vars
 # ------------------------------------------------------------------------------
 
 get_app_defaults_path() {
   local n="${NSAPP:-${APP,,}}"
-  echo "/usr/local/community-scripts/defaults/${n}.vars"
+  echo "/usr/local/Mornante/defaults/${n}.vars"
 }
 
 # ------------------------------------------------------------------------------
@@ -1441,7 +1441,7 @@ get_app_defaults_path() {
 #
 # - Called after advanced_settings returned with fully chosen values.
 # - If no <nsapp>.vars exists, offers to persist current advanced settings
-#   into /usr/local/community-scripts/defaults/<nsapp>.vars
+#   into /usr/local/Mornante/defaults/<nsapp>.vars
 # - Only writes whitelisted var_* keys.
 # - Extracts raw values from flags like ",gw=..." ",mtu=..." etc.
 # ------------------------------------------------------------------------------
@@ -1775,7 +1775,7 @@ ensure_storage_selection_for_vars_file() {
 }
 
 ensure_global_default_vars_file() {
-  local vars_path="/usr/local/community-scripts/default.vars"
+  local vars_path="/usr/local/Mornante/default.vars"
   if [[ ! -f "$vars_path" ]]; then
     mkdir -p "$(dirname "$vars_path")"
     touch "$vars_path"
@@ -2879,7 +2879,7 @@ Advanced:
 # ------------------------------------------------------------------------------
 # diagnostics_check()
 #
-# - Ensures diagnostics config file exists at /usr/local/community-scripts/diagnostics
+# - Ensures diagnostics config file exists at /usr/local/Mornante/diagnostics
 # - Asks user whether to send anonymous diagnostic data (first run only)
 # - Saves DIAGNOSTICS=yes/no in the config file
 # - Reads current diagnostics setting from existing file
@@ -2901,7 +2901,7 @@ diagnostics_check() {
   result=$(whiptail --backtitle "Proxmox VE Helper Scripts" \
     --title "TELEMETRY & DIAGNOSTICS" \
     --ok-button "Confirm" --cancel-button "Exit" \
-    --radiolist "\nHelp improve Community-Scripts by sharing anonymous data.\n\nWhat we collect:\n  - Container resources (CPU, RAM, disk), OS & PVE version\n  - Application name, install method and status\n\nWhat we DON'T collect:\n  - No IP addresses, hostnames, or personal data\n\nYou can change this anytime in the Settings menu.\nPrivacy: https://github.com/community-scripts/telemetry-service/blob/main/docs/PRIVACY.md\n\nUse SPACE to select, ENTER to confirm." 22 76 2 \
+    --radiolist "\nHelp improve Community-Scripts by sharing anonymous data.\n\nWhat we collect:\n  - Container resources (CPU, RAM, disk), OS & PVE version\n  - Application name, install method and status\n\nWhat we DON'T collect:\n  - No IP addresses, hostnames, or personal data\n\nYou can change this anytime in the Settings menu.\nPrivacy: https://github.com/Mornante/telemetry-service/blob/main/docs/PRIVACY.md\n\nUse SPACE to select, ENTER to confirm." 22 76 2 \
     "yes" "Yes, share anonymous data" OFF \
     "no" "No, opt out" OFF \
     3>&1 1>&2 2>&3) || result="no"
@@ -2925,7 +2925,7 @@ DIAGNOSTICS=${DIAGNOSTICS}
 #   nsapp, method, pve_version, status, exit_code
 #
 # No personal data (IPs, hostnames, passwords) is ever collected.
-# Privacy: https://github.com/community-scripts/telemetry-service/blob/main/docs/PRIVACY.md
+# Privacy: https://github.com/Mornante/telemetry-service/blob/main/docs/PRIVACY.md
 EOF
 }
 
@@ -2948,7 +2948,7 @@ diagnostics_menu() {
       --yesno "${dialog_text[*]}" 14 64 \
       --yes-button "Disable" --no-button "Keep enabled"; then
       DIAGNOSTICS="no"
-      sed -i 's/^DIAGNOSTICS=.*/DIAGNOSTICS=no/' /usr/local/community-scripts/diagnostics
+      sed -i 's/^DIAGNOSTICS=.*/DIAGNOSTICS=no/' /usr/local/Mornante/diagnostics
       whiptail --msgbox "Telemetry disabled.\n\nNote: Existing containers keep their current setting.\nNew containers will inherit this choice." 10 58
     fi
   else
@@ -2957,7 +2957,7 @@ diagnostics_menu() {
       --yesno "${dialog_text[*]}" 14 64 \
       --yes-button "Enable" --no-button "Keep disabled"; then
       DIAGNOSTICS="yes"
-      sed -i 's/^DIAGNOSTICS=.*/DIAGNOSTICS=yes/' /usr/local/community-scripts/diagnostics
+      sed -i 's/^DIAGNOSTICS=.*/DIAGNOSTICS=yes/' /usr/local/Mornante/diagnostics
       whiptail --msgbox "Telemetry enabled.\n\nNote: Existing containers keep their current setting.\nNew containers will inherit this choice." 10 58
     fi
   fi
@@ -3115,7 +3115,7 @@ install_script() {
         msg_error "Failed to apply default.vars"
         exit 110
       }
-      defaults_target="/usr/local/community-scripts/default.vars"
+      defaults_target="/usr/local/Mornante/default.vars"
       break
       ;;
     "$APPDEFAULTS_OPTION" | appdefaults | APPDEFAULTS)
@@ -3165,7 +3165,7 @@ install_script() {
 }
 
 edit_default_storage() {
-  local vf="/usr/local/community-scripts/default.vars"
+  local vf="/usr/local/Mornante/default.vars"
 
   # Ensure file exists
   if [[ ! -f "$vf" ]]; then
@@ -3200,7 +3200,7 @@ settings_menu() {
 
     case "$choice" in
     1) diagnostics_menu ;;
-    2) ${EDITOR:-nano} /usr/local/community-scripts/default.vars ;;
+    2) ${EDITOR:-nano} /usr/local/Mornante/default.vars ;;
     3)
       if [ -f "$(get_app_defaults_path)" ]; then
         ${EDITOR:-nano} "$(get_app_defaults_path)"
@@ -3513,7 +3513,7 @@ msg_menu() {
 # - Otherwise: shows update/setting menu and runs update_script with cleanup
 # ------------------------------------------------------------------------------
 start() {
-  source <(curl -fsSL https://raw.githubusercontent.com/community-scripts/ProxmoxVE/main/misc/tools.func)
+  source <(curl -fsSL https://raw.githubusercontent.com/Mornante/ProxmoxVE/main/misc/tools.func)
   if command -v pveversion >/dev/null 2>&1; then
     install_script || return 0
     return 0
@@ -3669,9 +3669,9 @@ build_container() {
   # Build PCT_OPTIONS as string for export
   local _func_url
   if [ "$var_os" == "alpine" ]; then
-    _func_url="https://raw.githubusercontent.com/community-scripts/ProxmoxVE/main/misc/alpine-install.func"
+    _func_url="https://raw.githubusercontent.com/Mornante/ProxmoxVE/main/misc/alpine-install.func"
   else
-    _func_url="https://raw.githubusercontent.com/community-scripts/ProxmoxVE/main/misc/install.func"
+    _func_url="https://raw.githubusercontent.com/Mornante/ProxmoxVE/main/misc/install.func"
   fi
   export FUNCTIONS_FILE_PATH="$(curl -fsSL "$_func_url")"
   if [[ -z "$FUNCTIONS_FILE_PATH" || ${#FUNCTIONS_FILE_PATH} -lt 100 ]]; then
@@ -3814,7 +3814,7 @@ $PCT_OPTIONS_STRING"
   #   - Environment variable: var_gpu=yes bash -c "..."
   #   - CT script default: var_gpu="${var_gpu:-no}"
   #   - Advanced settings wizard
-  #   - App defaults file: /usr/local/community-scripts/defaults/<app>.vars
+  #   - App defaults file: /usr/local/Mornante/defaults/<app>.vars
   is_gpu_app() {
     [[ "${var_gpu:-no}" == "yes" ]] && return 0
     return 1
@@ -4388,7 +4388,7 @@ EOF
     # that sends "configuring" status AFTER the host already reported "failed"
     export CONTAINER_INSTALLING=true
 
-    lxc-attach -n "$CTID" -- bash -c "$(curl -fsSL https://raw.githubusercontent.com/community-scripts/ProxmoxVE/main/install/${var_install}.sh)"
+    lxc-attach -n "$CTID" -- bash -c "$(curl -fsSL https://raw.githubusercontent.com/Mornante/ProxmoxVE/main/install/${var_install}.sh)"
     local lxc_exit=$?
 
     unset CONTAINER_INSTALLING
@@ -4711,7 +4711,7 @@ EOF
         if [[ "${DEV_MODE_MOTD:-false}" == "true" ]]; then
           echo -e "${TAB}${HOLD}${DGN}Setting up MOTD and SSH for debugging...${CL}"
           if pct exec "$CTID" -- bash -c "
-              source <(curl -fsSL https://raw.githubusercontent.com/community-scripts/ProxmoxVE/main/misc/install.func)
+              source <(curl -fsSL https://raw.githubusercontent.com/Mornante/ProxmoxVE/main/misc/install.func)
               declare -f motd_ssh >/dev/null 2>&1 && motd_ssh || true
             " >/dev/null 2>&1; then
             local ct_ip=$(pct exec "$CTID" ip a s dev eth0 2>/dev/null | awk '/inet / {print $2}' | cut -d/ -f1)
@@ -4783,7 +4783,7 @@ EOF
           # Re-run install script in existing container (don't destroy/recreate)
           set +Eeuo pipefail
           trap - ERR
-          lxc-attach -n "$CTID" -- bash -c "$(curl -fsSL https://raw.githubusercontent.com/community-scripts/ProxmoxVE/main/install/${var_install}.sh)"
+          lxc-attach -n "$CTID" -- bash -c "$(curl -fsSL https://raw.githubusercontent.com/Mornante/ProxmoxVE/main/install/${var_install}.sh)"
           local apt_retry_exit=$?
           set -Eeuo pipefail
           trap 'error_handler' ERR
@@ -6263,7 +6263,7 @@ description() {
     cat <<EOF
 <div align='center'>
   <a href='https://community-scripts.org' target='_blank' rel='noopener noreferrer'>
-    <img src='https://raw.githubusercontent.com/community-scripts/ProxmoxVE/main/misc/images/logo-81x112.png' alt='Logo' style='width:81px;height:112px;'/>
+    <img src='https://raw.githubusercontent.com/Mornante/ProxmoxVE/main/misc/images/logo-81x112.png' alt='Logo' style='width:81px;height:112px;'/>
   </a>
 
   <h2 style='font-size: 24px; margin: 20px 0;'>${APP} LXC</h2>
@@ -6282,15 +6282,15 @@ description() {
 
   <span style='margin: 0 10px;'>
     <i class="fa fa-github fa-fw" style="color: #f5f5f5;"></i>
-    <a href='https://github.com/community-scripts/ProxmoxVE' target='_blank' rel='noopener noreferrer' style='text-decoration: none; color: #00617f;'>GitHub</a>
+    <a href='https://github.com/Mornante/ProxmoxVE' target='_blank' rel='noopener noreferrer' style='text-decoration: none; color: #00617f;'>GitHub</a>
   </span>
   <span style='margin: 0 10px;'>
     <i class="fa fa-comments fa-fw" style="color: #f5f5f5;"></i>
-    <a href='https://github.com/community-scripts/ProxmoxVE/discussions' target='_blank' rel='noopener noreferrer' style='text-decoration: none; color: #00617f;'>Discussions</a>
+    <a href='https://github.com/Mornante/ProxmoxVE/discussions' target='_blank' rel='noopener noreferrer' style='text-decoration: none; color: #00617f;'>Discussions</a>
   </span>
   <span style='margin: 0 10px;'>
     <i class="fa fa-exclamation-circle fa-fw" style="color: #f5f5f5;"></i>
-    <a href='https://github.com/community-scripts/ProxmoxVE/issues' target='_blank' rel='noopener noreferrer' style='text-decoration: none; color: #00617f;'>Issues</a>
+    <a href='https://github.com/Mornante/ProxmoxVE/issues' target='_blank' rel='noopener noreferrer' style='text-decoration: none; color: #00617f;'>Issues</a>
   </span>
 </div>
 EOF

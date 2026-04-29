@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://raw.githubusercontent.com/community-scripts/ProxmoxVE/main/misc/images/logo-81x112.png" height="112px" alt="Proxmox VE Helper-Scripts Logo" />
+  <img src="https://raw.githubusercontent.com/Mornante/ProxmoxVE/main/misc/images/logo-81x112.png" height="112px" alt="Proxmox VE Helper-Scripts Logo" />
 
   <h1>Proxmox VE Helper-Scripts</h1>
   <p><strong>One-command installations for services, containers, and VMs on Proxmox VE</strong><br/>
@@ -8,8 +8,8 @@
   <p>
     <a href="https://community-scripts.org"><img src="https://img.shields.io/badge/Website-community--scripts.org-4c9b3f?style=flat-square" /></a>
     <a href="https://discord.gg/3AnUqsXnmK"><img src="https://img.shields.io/badge/Discord-Join_us-7289da?style=flat-square&logo=discord&logoColor=white" /></a>
-    <a href="https://github.com/community-scripts/ProxmoxVE/stargazers"><img src="https://img.shields.io/github/stars/community-scripts/ProxmoxVE?style=flat-square&label=Stars&color=f5a623" /></a>
-    <a href="https://github.com/community-scripts/ProxmoxVE/blob/main/CHANGELOG.md"><img src="https://img.shields.io/badge/Changelog-view-6c5ce7?style=flat-square" /></a>
+    <a href="https://github.com/Mornante/ProxmoxVE/stargazers"><img src="https://img.shields.io/github/stars/Mornante/ProxmoxVE?style=flat-square&label=Stars&color=f5a623" /></a>
+    <a href="https://github.com/Mornante/ProxmoxVE/blob/main/CHANGELOG.md"><img src="https://img.shields.io/badge/Changelog-view-6c5ce7?style=flat-square" /></a>
     <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-blue?style=flat-square" /></a>
   </p>
 </div>
@@ -93,16 +93,16 @@ This project runs on community contributions. Whether you want to write new scri
 
 | I want to…                            | Go here                                                                                           |
 | ------------------------------------- | ------------------------------------------------------------------------------------------------- |
-| Add a **new** script                  | [ProxmoxVED](https://github.com/community-scripts/ProxmoxVED) — new scripts are tested here first |
+| Add a **new** script                  | [ProxmoxVED](https://github.com/Mornante/ProxmoxVED) — new scripts are tested here first |
 | Fix or improve an **existing** script | [Contributing Guidelines](CONTRIBUTING.md) — open a PR in this repo                               |
-| Report a bug or broken script         | [Issues](https://github.com/community-scripts/ProxmoxVE/issues)                                   |
-| Request a new script or feature       | [Discussions](https://github.com/community-scripts/ProxmoxVE/discussions)                         |
+| Report a bug or broken script         | [Issues](https://github.com/Mornante/ProxmoxVE/issues)                                   |
+| Request a new script or feature       | [Discussions](https://github.com/Mornante/ProxmoxVE/discussions)                         |
 | Report a security vulnerability       | [Security Policy](SECURITY.md)                                                                    |
 | Get help or chat with other users     | [Discord](https://discord.gg/3AnUqsXnmK)                                                          |
 
 ### Before you open a PR
 
-- **New scripts go to [ProxmoxVED](https://github.com/community-scripts/ProxmoxVED), not here.** PRs with new scripts opened directly against this repo will be closed.
+- **New scripts go to [ProxmoxVED](https://github.com/Mornante/ProxmoxVED), not here.** PRs with new scripts opened directly against this repo will be closed.
 - Bug fixes and improvements to existing scripts belong in this repo — read the [Contributing Guidelines](CONTRIBUTING.md) first.
 - Keep PRs focused. One fix or feature per PR.
 - Document what your script installs and any non-obvious decisions in the corresponding JSON metadata file.
