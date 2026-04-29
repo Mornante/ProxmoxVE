@@ -2,7 +2,7 @@
 
 # Copyright (c) 2021-2026 community-scripts ORG
 # Author: Joerg Heinemann (heinemannj)
-# License: MIT | https://github.com/Mornante/ProxmoxVE/raw/main/LICENSE
+# License: MIT | https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
 # Source: https://github.com/smallstep/certificates
 
 source /dev/stdin <<<"$FUNCTIONS_FILE_PATH"
@@ -137,7 +137,7 @@ cat <<'ADDON_EOF' >"$STEPHOME/step-ca-admin.sh"
 
 # Copyright (c) 2021-2026 community-scripts ORG
 # Author: Joerg Heinemann (heinemannj)
-# License: MIT | https://github.com/Mornante/ProxmoxVE/raw/main/LICENSE
+# License: MIT | https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
 
 function header_info() {
   clear
@@ -326,7 +326,7 @@ CL=$(echo "\033[m")
 
 # Telemetry
 # shellcheck disable=SC1090
-source <(curl -fsSL https://raw.githubusercontent.com/Mornante/ProxmoxVE/main/misc/api.func) 2>/dev/null || true
+source <(curl -fsSL https://raw.githubusercontent.com/community-scripts/ProxmoxVE/main/misc/api.func) 2>/dev/null || true
 declare -f init_tool_telemetry &>/dev/null && init_tool_telemetry "step-ca-admin" "step-ca"
 
 header_info

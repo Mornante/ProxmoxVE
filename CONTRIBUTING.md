@@ -9,17 +9,17 @@ For detailed coding standards and full documentation, visit **[community-scripts
 ## How Can I Help?
 
 > [!IMPORTANT]
-> **New scripts** must always be submitted to [ProxmoxVED](https://github.com/Mornante/ProxmoxVED) first — not to this repository.
+> **New scripts** must always be submitted to [ProxmoxVED](https://github.com/community-scripts/ProxmoxVED) first — not to this repository.
 > PRs with new scripts opened directly against ProxmoxVE **will be closed without review**.
 > **Bug fixes, improvements, and features for existing scripts** go here (ProxmoxVE).
 
 | I want to…                                  | Where to go                                                                                  |
 | :------------------------------------------ | :------------------------------------------------------------------------------------------- |
-| **Add a brand-new script**                  | [ProxmoxVED](https://github.com/Mornante/ProxmoxVED) — testing repo for new scripts |
+| **Add a brand-new script**                  | [ProxmoxVED](https://github.com/community-scripts/ProxmoxVED) — testing repo for new scripts |
 | **Fix a bug or improve an existing script** | This repo (ProxmoxVE) — open a PR here                                                       |
 | **Add a feature to an existing script**     | This repo (ProxmoxVE) — open a PR here                                                       |
-| Report a bug or broken script               | [Open an Issue](https://github.com/Mornante/ProxmoxVE/issues)                       |
-| Request a new script or feature             | [Start a Discussion](https://github.com/Mornante/ProxmoxVE/discussions)             |
+| Report a bug or broken script               | [Open an Issue](https://github.com/community-scripts/ProxmoxVE/issues)                       |
+| Request a new script or feature             | [Start a Discussion](https://github.com/community-scripts/ProxmoxVE/discussions)             |
 | Report a security vulnerability             | [Security Policy](SECURITY.md)                                                               |
 | Chat with contributors                      | [Discord](https://discord.gg/3AnUqsXnmK)                                                     |
 
@@ -55,7 +55,7 @@ Use existing scripts in [`ct/`](ct/) and [`install/`](install/) as reference. Fu
 
 New scripts are **not accepted directly in this repository**. The workflow is:
 
-1. Fork [ProxmoxVED](https://github.com/Mornante/ProxmoxVED) and clone it
+1. Fork [ProxmoxVED](https://github.com/community-scripts/ProxmoxVED) and clone it
 2. Create a branch: `git switch -c feat/myapp`
 3. Write your two script files:
    - `ct/myapp.sh`
@@ -113,7 +113,7 @@ Full standards and examples: **[community-scripts.org/docs/contribution](https:/
 Set the `dev_mode` variable to enable debugging features when testing. Flags can be combined (comma-separated):
 
 ```bash
-dev_mode="trace,keep" bash -c "$(curl -fsSL https://raw.githubusercontent.com/Mornante/ProxmoxVE/main/ct/myapp.sh)"
+dev_mode="trace,keep" bash -c "$(curl -fsSL https://raw.githubusercontent.com/community-scripts/ProxmoxVE/main/ct/myapp.sh)"
 ```
 
 | Flag         | Description                                                  |
@@ -122,7 +122,7 @@ dev_mode="trace,keep" bash -c "$(curl -fsSL https://raw.githubusercontent.com/Mo
 | `keep`       | Prevents the container from being deleted if the build fails |
 | `pause`      | Pauses execution at key points before customization          |
 | `breakpoint` | Drops to a shell at hardcoded `breakpoint` calls in scripts  |
-| `logs`       | Saves detailed build logs to `/var/log/Mornante/`   |
+| `logs`       | Saves detailed build logs to `/var/log/community-scripts/`   |
 | `dryrun`     | Bypasses actual container creation (limited support)         |
 | `motd`       | Forces an update of the Message of the Day                   |
 
@@ -133,5 +133,5 @@ dev_mode="trace,keep" bash -c "$(curl -fsSL https://raw.githubusercontent.com/Mo
 - **Website metadata** (name, description, logo, tags) is managed via the website — use the "Report Issue" link on any script page to request changes. Do not submit metadata changes via repo files.
 - **JSON files** in `json/` define script properties used by the website. See existing files for structure reference.
 - Keep PRs small and focused. One fix or feature per PR is ideal.
-- PRs with **new scripts** opened against ProxmoxVE will be closed — submit them to [ProxmoxVED](https://github.com/Mornante/ProxmoxVED) instead.
+- PRs with **new scripts** opened against ProxmoxVE will be closed — submit them to [ProxmoxVED](https://github.com/community-scripts/ProxmoxVED) instead.
 - PRs that fail CI checks will not be merged.

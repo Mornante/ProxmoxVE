@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Copyright (c) 2021-2026 community-scripts ORG
-# License: MIT | https://raw.githubusercontent.com/Mornante/ProxmoxVE/main/LICENSE
+# License: MIT | https://raw.githubusercontent.com/community-scripts/ProxmoxVE/main/LICENSE
 
 # ==============================================================================
 # CORE FUNCTIONS - LXC CONTAINER UTILITIES
@@ -201,7 +201,7 @@ set_std_mode() {
 #   * DEV_MODE_TRACE: Enable bash set -x tracing
 #   * DEV_MODE_PAUSE: Pause after each msg_info step
 #   * DEV_MODE_BREAKPOINT: Open shell on error instead of cleanup
-#   * DEV_MODE_LOGS: Persist all logs to /var/log/Mornante/
+#   * DEV_MODE_LOGS: Persist all logs to /var/log/community-scripts/
 #   * DEV_MODE_DRYRUN: Show commands without executing
 # - Call this early in script execution
 # ------------------------------------------------------------------------------
@@ -844,7 +844,7 @@ get_header() {
   local app_type=${APP_TYPE:-ct} # Default to 'ct' if not set
   local header_dir="${app_type}"
   [[ "$app_type" == "addon" ]] && header_dir="tools"
-  local header_url="https://raw.githubusercontent.com/Mornante/ProxmoxVE/main/${header_dir}/headers/${app_name}"
+  local header_url="https://raw.githubusercontent.com/community-scripts/ProxmoxVE/main/${header_dir}/headers/${app_name}"
   local local_header_path="/usr/local/community-scripts/headers/${app_type}/${app_name}"
 
   mkdir -p "$(dirname "$local_header_path")"
