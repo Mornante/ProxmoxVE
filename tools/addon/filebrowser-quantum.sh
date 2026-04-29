@@ -28,7 +28,7 @@ INFO="${BL}ℹ️${CL}"
 
 APP="FileBrowser Quantum"
 INSTALL_PATH="/usr/local/bin/filebrowser"
-CONFIG_PATH="/usr/local/Mornante/fq-config.yaml"
+CONFIG_PATH="/usr/local/community-scripts/fq-config.yaml"
 DEFAULT_PORT=8080
 SRC_DIR="/"
 TMP_BIN="/tmp/filebrowser.$$"
@@ -79,7 +79,7 @@ function msg_ok() { echo -e "${CM} ${GN}$1${CL}"; }
 function msg_error() { echo -e "${CROSS} ${RD}$1${CL}"; }
 
 # Detect legacy FileBrowser installation
-LEGACY_DB="/usr/local/Mornante/filebrowser.db"
+LEGACY_DB="/usr/local/community-scripts/filebrowser.db"
 LEGACY_BIN="/usr/local/bin/filebrowser"
 LEGACY_SERVICE_DEB="/etc/systemd/system/filebrowser.service"
 LEGACY_SERVICE_ALP="/etc/init.d/filebrowser"
@@ -246,7 +246,7 @@ command="/usr/local/bin/filebrowser"
 command_args="-c $CONFIG_PATH"
 command_background=true
 directory="/usr/local/community-scripts"
-pidfile="/usr/local/Mornante/pidfile"
+pidfile="/usr/local/community-scripts/pidfile"
 
 depend() {
     need net

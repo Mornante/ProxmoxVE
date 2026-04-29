@@ -1265,7 +1265,7 @@ load_vars_file() {
 # ------------------------------------------------------------------------------
 # default_var_settings
 #
-# - Ensures /usr/local/Mornante/default.vars exists (creates if missing)
+# - Ensures /usr/local/community-scripts/default.vars exists (creates if missing)
 # - Loads var_* values from default.vars (safe parser, no source/eval)
 # - Precedence: ENV var_* > default.vars > built-in defaults
 # - Maps var_verbose → VERBOSE
@@ -1293,7 +1293,7 @@ default_var_settings() {
   _find_default_vars() {
     local f
     for f in \
-      /usr/local/Mornante/default.vars \
+      /usr/local/community-scripts/default.vars \
       "$HOME/.config/Mornante/default.vars" \
       "./default.vars"; do
       [ -f "$f" ] && {
@@ -1312,7 +1312,7 @@ default_var_settings() {
   _ensure_default_vars() {
     _find_default_vars >/dev/null 2>&1 && return 0
 
-    local canonical="/usr/local/Mornante/default.vars"
+    local canonical="/usr/local/community-scripts/default.vars"
     # Silent creation - no msg_info output
     mkdir -p /usr/local/community-scripts
 
@@ -1428,12 +1428,12 @@ EOF
 # get_app_defaults_path()
 #
 # - Returns full path for app-specific defaults file
-# - Example: /usr/local/Mornante/defaults/<app>.vars
+# - Example: /usr/local/community-scripts/defaults/<app>.vars
 # ------------------------------------------------------------------------------
 
 get_app_defaults_path() {
   local n="${NSAPP:-${APP,,}}"
-  echo "/usr/local/Mornante/defaults/${n}.vars"
+  echo "/usr/local/community-scripts/defaults/${n}.vars"
 }
 
 # ------------------------------------------------------------------------------
@@ -1441,7 +1441,7 @@ get_app_defaults_path() {
 #
 # - Called after advanced_settings returned with fully chosen values.
 # - If no <nsapp>.vars exists, offers to persist current advanced settings
-#   into /usr/local/Mornante/defaults/<nsapp>.vars
+#   into /usr/local/community-scripts/defaults/<nsapp>.vars
 # - Only writes whitelisted var_* keys.
 # - Extracts raw values from flags like ",gw=..." ",mtu=..." etc.
 # ------------------------------------------------------------------------------
@@ -1775,7 +1775,7 @@ ensure_storage_selection_for_vars_file() {
 }
 
 ensure_global_default_vars_file() {
-  local vars_path="/usr/local/Mornante/default.vars"
+  local vars_path="/usr/local/community-scripts/default.vars"
   if [[ ! -f "$vars_path" ]]; then
     mkdir -p "$(dirname "$vars_path")"
     touch "$vars_path"
@@ -2879,7 +2879,7 @@ Advanced:
 # ------------------------------------------------------------------------------
 # diagnostics_check()
 #
-# - Ensures diagnostics config file exists at /usr/local/Mornante/diagnostics
+# - Ensures diagnostics config file exists at /usr/local/community-scripts/diagnostics
 # - Asks user whether to send anonymous diagnostic data (first run only)
 # - Saves DIAGNOSTICS=yes/no in the config file
 # - Reads current diagnostics setting from existing file
@@ -2948,7 +2948,7 @@ diagnostics_menu() {
       --yesno "${dialog_text[*]}" 14 64 \
       --yes-button "Disable" --no-button "Keep enabled"; then
       DIAGNOSTICS="no"
-      sed -i 's/^DIAGNOSTICS=.*/DIAGNOSTICS=no/' /usr/local/Mornante/diagnostics
+      sed -i 's/^DIAGNOSTICS=.*/DIAGNOSTICS=no/' /usr/local/community-scripts/diagnostics
       whiptail --msgbox "Telemetry disabled.\n\nNote: Existing containers keep their current setting.\nNew containers will inherit this choice." 10 58
     fi
   else
@@ -2957,7 +2957,7 @@ diagnostics_menu() {
       --yesno "${dialog_text[*]}" 14 64 \
       --yes-button "Enable" --no-button "Keep disabled"; then
       DIAGNOSTICS="yes"
-      sed -i 's/^DIAGNOSTICS=.*/DIAGNOSTICS=yes/' /usr/local/Mornante/diagnostics
+      sed -i 's/^DIAGNOSTICS=.*/DIAGNOSTICS=yes/' /usr/local/community-scripts/diagnostics
       whiptail --msgbox "Telemetry enabled.\n\nNote: Existing containers keep their current setting.\nNew containers will inherit this choice." 10 58
     fi
   fi
@@ -3115,7 +3115,7 @@ install_script() {
         msg_error "Failed to apply default.vars"
         exit 110
       }
-      defaults_target="/usr/local/Mornante/default.vars"
+      defaults_target="/usr/local/community-scripts/default.vars"
       break
       ;;
     "$APPDEFAULTS_OPTION" | appdefaults | APPDEFAULTS)
@@ -3165,7 +3165,7 @@ install_script() {
 }
 
 edit_default_storage() {
-  local vf="/usr/local/Mornante/default.vars"
+  local vf="/usr/local/community-scripts/default.vars"
 
   # Ensure file exists
   if [[ ! -f "$vf" ]]; then
@@ -3200,7 +3200,7 @@ settings_menu() {
 
     case "$choice" in
     1) diagnostics_menu ;;
-    2) ${EDITOR:-nano} /usr/local/Mornante/default.vars ;;
+    2) ${EDITOR:-nano} /usr/local/community-scripts/default.vars ;;
     3)
       if [ -f "$(get_app_defaults_path)" ]; then
         ${EDITOR:-nano} "$(get_app_defaults_path)"
@@ -3814,7 +3814,7 @@ $PCT_OPTIONS_STRING"
   #   - Environment variable: var_gpu=yes bash -c "..."
   #   - CT script default: var_gpu="${var_gpu:-no}"
   #   - Advanced settings wizard
-  #   - App defaults file: /usr/local/Mornante/defaults/<app>.vars
+  #   - App defaults file: /usr/local/community-scripts/defaults/<app>.vars
   is_gpu_app() {
     [[ "${var_gpu:-no}" == "yes" ]] && return 0
     return 1

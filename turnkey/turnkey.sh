@@ -161,7 +161,7 @@ shell_check
 root_check
 
 # Read diagnostics preference (same logic as build.func diagnostics_check)
-DIAG_CONFIG="/usr/local/Mornante/diagnostics"
+DIAG_CONFIG="/usr/local/community-scripts/diagnostics"
 if [[ -f "$DIAG_CONFIG" ]]; then
   DIAGNOSTICS=$(awk -F '=' '/^DIAGNOSTICS/ {print $2}' "$DIAG_CONFIG") || true
   DIAGNOSTICS="${DIAGNOSTICS:-no}"

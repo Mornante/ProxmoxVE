@@ -27,7 +27,7 @@ INFO="${BL}ℹ️${CL}"
 
 APP="FileBrowser"
 INSTALL_PATH="/usr/local/bin/filebrowser"
-DB_PATH="/usr/local/Mornante/filebrowser.db"
+DB_PATH="/usr/local/community-scripts/filebrowser.db"
 DEFAULT_PORT=8080
 
 # Telemetry
@@ -170,9 +170,9 @@ After=network-online.target
 [Service]
 User=root
 WorkingDirectory=/usr/local/community-scripts
-ExecStartPre=/bin/touch /usr/local/Mornante/filebrowser.db
-ExecStartPre=/usr/local/bin/filebrowser config set -a "0.0.0.0" -p ${PORT} -d /usr/local/Mornante/filebrowser.db
-ExecStart=/usr/local/bin/filebrowser -r / -d /usr/local/Mornante/filebrowser.db -p ${PORT}
+ExecStartPre=/bin/touch /usr/local/community-scripts/filebrowser.db
+ExecStartPre=/usr/local/bin/filebrowser config set -a "0.0.0.0" -p ${PORT} -d /usr/local/community-scripts/filebrowser.db
+ExecStart=/usr/local/bin/filebrowser -r / -d /usr/local/community-scripts/filebrowser.db -p ${PORT}
 Restart=always
 
 [Install]

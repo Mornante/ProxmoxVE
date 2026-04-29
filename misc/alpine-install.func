@@ -13,9 +13,9 @@ catch_errors
 
 # Persist diagnostics setting inside container (exported from build.func)
 # so addon scripts running later can find the user's choice
-if [[ ! -f /usr/local/Mornante/diagnostics ]]; then
+if [[ ! -f /usr/local/community-scripts/diagnostics ]]; then
   mkdir -p /usr/local/community-scripts
-  echo "DIAGNOSTICS=${DIAGNOSTICS:-no}" >/usr/local/Mornante/diagnostics
+  echo "DIAGNOSTICS=${DIAGNOSTICS:-no}" >/usr/local/community-scripts/diagnostics
 fi
 
 # Get LXC IP address (must be called INSIDE container, after network is up)
