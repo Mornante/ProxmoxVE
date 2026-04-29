@@ -2,9 +2,9 @@
 # ------------------------------------------------------------------------------
 # ERROR HANDLER - ERROR & SIGNAL MANAGEMENT
 # ------------------------------------------------------------------------------
-# Copyright (c) 2021-2026 community-scripts ORG
+# Copyright (c) 2021-2026 Mornante ORG
 # Author: MickLesk (CanbiZ)
-# License: MIT | https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
+# License: MIT | https://github.com/Mornante/ProxmoxVE/raw/main/LICENSE
 # ------------------------------------------------------------------------------
 #
 # Provides comprehensive error handling and signal management for all scripts.
@@ -512,7 +512,7 @@ _send_abort_telemetry() {
   [[ -n "$duration" ]] && payload="${payload},\"duration\":${duration}"
   payload="${payload}}"
 
-  local api_url="${TELEMETRY_URL:-https://telemetry.community-scripts.org/telemetry}"
+  local api_url="${TELEMETRY_URL:-https://telemetry.Mornante.org/telemetry}"
 
   # 2 attempts (retry once on failure) — original had no retry
   local attempt

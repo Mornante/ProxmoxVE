@@ -1,13 +1,13 @@
-# Copyright (c) 2021-2026 community-scripts ORG
+# Copyright (c) 2021-2026 Mornante ORG
 # Author: michelroegl-brunner | MickLesk
-# License: MIT | https://raw.githubusercontent.com/community-scripts/ProxmoxVE/main/LICENSE
+# License: MIT | https://raw.githubusercontent.com/Mornante/ProxmoxVE/main/LICENSE
 
 # ==============================================================================
 # API.FUNC - TELEMETRY & DIAGNOSTICS API
 # ==============================================================================
 #
 # Provides functions for sending anonymous telemetry data via the community
-# telemetry ingest service at telemetry.community-scripts.org.
+# telemetry ingest service at telemetry.Mornante.org.
 #
 # Features:
 #   - Container/VM creation statistics
@@ -32,7 +32,7 @@
 # ==============================================================================
 # Telemetry Configuration
 # ==============================================================================
-TELEMETRY_URL="https://telemetry.community-scripts.org/telemetry"
+TELEMETRY_URL="https://telemetry.Mornante.org/telemetry"
 
 # Timeout for telemetry requests (seconds)
 # Progress pings (validation/configuring) use the short timeout
@@ -51,8 +51,8 @@ STATUS_TIMEOUT=10
 # - Dynamically detects which GitHub/Gitea repo the scripts were loaded from
 # - Inspects /proc/$$/cmdline and $0 to find the source URL
 # - Maps detected repo to one of three canonical values:
-#   * "ProxmoxVE"  — official community-scripts/ProxmoxVE (production)
-#   * "ProxmoxVED" — official community-scripts/ProxmoxVED (development)
+#   * "ProxmoxVE"  — official Mornante/ProxmoxVE (production)
+#   * "ProxmoxVED" — official Mornante/ProxmoxVED (development)
 #   * "external"   — any fork or unknown source
 # - Fallback: "ProxmoxVED" (CI sed transforms ProxmoxVED → ProxmoxVE on promotion)
 # - Sets and exports REPO_SOURCE global variable
@@ -72,7 +72,7 @@ detect_repo_source() {
   fi
 
   # Method 2: Read from the original script file (bash ct/app.sh / bash vm/app.sh)
-  if [[ -z "$content" ]] || ! echo "$content" | grep -qE 'githubusercontent\.com|community-scripts\.org' 2>/dev/null; then
+  if [[ -z "$content" ]] || ! echo "$content" | grep -qE 'githubusercontent\.com|Mornante\.org' 2>/dev/null; then
     if [[ -f "$0" ]] && [[ "$0" != *bash* ]]; then
       content=$(head -10 "$0" 2>/dev/null) || true
     fi
@@ -83,16 +83,16 @@ detect_repo_source() {
     # GitHub raw URL: raw.githubusercontent.com/OWNER/REPO/...
     owner_repo=$(echo "$content" | grep -oE 'raw\.githubusercontent\.com/[^/]+/[^/]+' | head -1 | sed 's|raw\.githubusercontent\.com/||') || true
 
-    # Gitea URL: git.community-scripts.org/OWNER/REPO/...
+    # Gitea URL: git.Mornante.org/OWNER/REPO/...
     if [[ -z "$owner_repo" ]]; then
-      owner_repo=$(echo "$content" | grep -oE 'git\.community-scripts\.org/[^/]+/[^/]+' | head -1 | sed 's|git\.community-scripts\.org/||') || true
+      owner_repo=$(echo "$content" | grep -oE 'git\.Mornante\.org/[^/]+/[^/]+' | head -1 | sed 's|git\.Mornante\.org/||') || true
     fi
   fi
 
   # Map detected owner/repo to canonical repo_source value
   case "$owner_repo" in
-  community-scripts/ProxmoxVE) REPO_SOURCE="ProxmoxVE" ;;
-  community-scripts/ProxmoxVED) REPO_SOURCE="ProxmoxVED" ;;
+  Mornante/ProxmoxVE) REPO_SOURCE="ProxmoxVE" ;;
+  Mornante/ProxmoxVED) REPO_SOURCE="ProxmoxVED" ;;
   "")
     # No URL detected — use hardcoded fallback
     # This value must match the repo: ProxmoxVE for production, ProxmoxVED for dev
@@ -738,7 +738,7 @@ EOF
 # post_to_api_vm()
 #
 # - Sends VM creation statistics to telemetry ingest service
-# - Reads DIAGNOSTICS from /usr/local/community-scripts/diagnostics file
+# - Reads DIAGNOSTICS from /usr/local/Mornante/diagnostics file
 # - Payload differences from LXC:
 #   * ct_type=2 (VM instead of LXC)
 #   * type="vm"
@@ -749,8 +749,8 @@ EOF
 # ------------------------------------------------------------------------------
 post_to_api_vm() {
   # Read diagnostics setting from file
-  if [[ -f /usr/local/community-scripts/diagnostics ]]; then
-    DIAGNOSTICS=$(grep -i "^DIAGNOSTICS=" /usr/local/community-scripts/diagnostics 2>/dev/null | awk -F'=' '{print $2}') || true
+  if [[ -f /usr/local/Mornante/diagnostics ]]; then
+    DIAGNOSTICS=$(grep -i "^DIAGNOSTICS=" /usr/local/Mornante/diagnostics 2>/dev/null | awk -F'=' '{print $2}') || true
   fi
 
   # Silent fail - telemetry should never break scripts
@@ -859,7 +859,7 @@ post_progress_to_api() {
   local app_name="${NSAPP:-${app:-unknown}}"
   local telemetry_type="${TELEMETRY_TYPE:-lxc}"
 
-  curl -fsS -m 5 -X POST "${TELEMETRY_URL:-https://telemetry.community-scripts.org/telemetry}" \
+  curl -fsS -m 5 -X POST "${TELEMETRY_URL:-https://telemetry.Mornante.org/telemetry}" \
     -H "Content-Type: application/json" \
     -d "{\"random_id\":\"${RANDOM_UUID}\",\"execution_id\":\"${EXECUTION_ID:-${RANDOM_UUID}}\",\"type\":\"${telemetry_type}\",\"nsapp\":\"${app_name}\",\"status\":\"${progress_status}\"}" &>/dev/null || true
 }
@@ -1226,7 +1226,7 @@ _telemetry_report_exit() {
 # init_tool_telemetry()
 #
 # - One-line telemetry setup for tools/addon scripts
-# - Reads DIAGNOSTICS from /usr/local/community-scripts/diagnostics
+# - Reads DIAGNOSTICS from /usr/local/Mornante/diagnostics
 #   (persisted on PVE host during first build, and inside containers by install.func)
 # - Starts install timer for duration tracking
 # - Sets EXIT trap to automatically report success/failure on script exit
@@ -1246,8 +1246,8 @@ init_tool_telemetry() {
   TELEMETRY_TOOL_TYPE="$type"
 
   # Read diagnostics opt-in/opt-out
-  if [[ -f /usr/local/community-scripts/diagnostics ]]; then
-    DIAGNOSTICS=$(grep -i "^DIAGNOSTICS=" /usr/local/community-scripts/diagnostics 2>/dev/null | awk -F'=' '{print $2}') || true
+  if [[ -f /usr/local/Mornante/diagnostics ]]; then
+    DIAGNOSTICS=$(grep -i "^DIAGNOSTICS=" /usr/local/Mornante/diagnostics 2>/dev/null | awk -F'=' '{print $2}') || true
   fi
 
   start_install_timer
