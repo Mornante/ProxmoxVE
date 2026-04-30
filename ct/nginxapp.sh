@@ -1,15 +1,15 @@
 #!/usr/bin/env bash
-source <(curl -fsSL https://raw.githubusercontent.com/community-scripts/ProxmoxVE/main/misc/build.func)
-# Copyright (c) 2021-2026 community-scripts ORG
+source <(curl -fsSL https://raw.githubusercontent.com/Mornante/ProxmoxVE/main/misc/build.func)
+# Copyright (c) 2021-2026 Mornante ORG
 # Author: Kristian Skov
-# License: MIT | https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
+# License: MIT | https://github.com/Mornante/ProxmoxVE/raw/main/LICENSE
 # Source: https://learn.microsoft.com/en-us/aspnet/core/host-and-deploy/linux-nginx?view=aspnetcore-9.0&tabs=linux-ubuntu
 
-APP="Dotnet ASP Web API"
+APP="Nginx App"
 var_tags="${var_tags:-web}"
 var_cpu="${var_cpu:-1}"
-var_ram="${var_ram:-1024}"
-var_disk="${var_disk:-8}"
+var_ram="${var_ram:-256}"
+var_disk="${var_disk:-1}"
 var_os="${var_os:-ubuntu}"
 var_version="${var_version:-24.04}"
 var_unprivileged="${var_unprivileged:-0}"
