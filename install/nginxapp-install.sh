@@ -27,13 +27,14 @@ FTP_PASS=$(openssl rand -base64 18 | tr -dc 'a-zA-Z0-9' | head -c13)
 usermod --password $(echo ${FTP_PASS} | openssl passwd -1 -stdin) ftpuser
 mkdir -p /var/www/html
 usermod -d /var/www/html ftpuser
-chown -R ftpuser:www-data /var/www/html  # changed from plain chown
-chmod -R 750 /var/www/html               # new
-find /var/www/html -type f -exec chmod 640 {} \;  # new
-chmod g+s /var/www/html                  # new
+chown -R ftpuser:www-data /var/www/html
+chmod -R 750 /var/www/html
+find /var/www/html -type f -exec chmod 640 {} \;
+chmod g+s /var/www/html
 
 sed -i "s|#write_enable=YES|write_enable=YES|g" /etc/vsftpd.conf
 sed -i "s|#chroot_local_user=YES|chroot_local_user=NO|g" /etc/vsftpd.conf
+echo "local_umask=027" >> /etc/vsftpd.conf
 
 systemctl restart -q vsftpd.service
 
