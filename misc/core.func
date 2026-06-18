@@ -11,7 +11,7 @@
 # execution helpers used throughout the Mornante ecosystem.
 #
 # Usage:
-#   source <(curl -fsSL https://git.Mornante.org/.../core.func)
+#   source <(curl -fsSL https://git.community-scripts.org/.../core.func)
 #   load_functions
 #
 # ==============================================================================
