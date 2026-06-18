@@ -1,7 +1,7 @@
-# Copyright (c) 2021-2026 Community-Scripts ORG
+# Copyright (c) 2021-2026 community-scripts ORG
 # Author: tteck (tteckster)
 # Co-Author: MickLesk
-# License: MIT | https://github.com/Community-Scripts/ProxmoxVE/raw/main/LICENSE
+# License: MIT | https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
 
 # ==============================================================================
 # INSTALL.FUNC - CONTAINER INSTALLATION & SETUP
@@ -39,9 +39,9 @@ catch_errors
 
 # Persist diagnostics setting inside container (exported from build.func)
 # so addon scripts running later can find the user's choice
-if [[ ! -f /usr/local/Community-Scripts/diagnostics ]]; then
-  mkdir -p /usr/local/Community-Scripts
-  echo "DIAGNOSTICS=${DIAGNOSTICS:-no}" >/usr/local/Community-Scripts/diagnostics
+if [[ ! -f /usr/local/community-scripts/diagnostics ]]; then
+  mkdir -p /usr/local/community-scripts
+  echo "DIAGNOSTICS=${DIAGNOSTICS:-no}" >/usr/local/community-scripts/diagnostics
 fi
 
 # Get LXC IP address (must be called INSIDE container, after network is up)
@@ -65,7 +65,7 @@ post_progress_to_api() {
 
   local progress_status="${1:-configuring}"
 
-  curl -fsS -m 5 -X POST "https://telemetry.Community-Scripts.org/telemetry" \
+  curl -fsS -m 5 -X POST "https://telemetry.community-scripts.org/telemetry" \
     -H "Content-Type: application/json" \
     -d "{\"random_id\":\"${RANDOM_UUID}\",\"execution_id\":\"${EXECUTION_ID:-${RANDOM_UUID}}\",\"type\":\"lxc\",\"nsapp\":\"${app:-unknown}\",\"status\":\"${progress_status}\"}" &>/dev/null || true
 }
@@ -88,7 +88,7 @@ verb_ip6() {
     msg_info "Disabling IPv6 (this may affect some services)"
     mkdir -p /etc/sysctl.d
     $STD tee /etc/sysctl.d/99-disable-ipv6.conf >/dev/null <<EOF
-# Disable IPv6 (set by Community-Scripts)
+# Disable IPv6 (set by community-scripts)
 net.ipv6.conf.all.disable_ipv6 = 1
 net.ipv6.conf.default.disable_ipv6 = 1
 net.ipv6.conf.lo.disable_ipv6 = 1
@@ -182,7 +182,7 @@ network_check() {
   fi
 
   # DNS resolution checks for GitHub-related domains (IPv4 and/or IPv6)
-  GIT_HOSTS=("github.com" "raw.githubusercontent.com" "api.github.com" "git.Community-Scripts.org")
+  GIT_HOSTS=("github.com" "raw.githubusercontent.com" "api.github.com" "git.community-scripts.org")
   GIT_STATUS="Git DNS:"
   DNS_FAILED=false
 
@@ -459,7 +459,7 @@ motd_ssh() {
   echo "[ -t 1 ] || return 0" >"$PROFILE_FILE"
   echo "echo -e \"\"" >>"$PROFILE_FILE"
   echo -e "echo -e \"${BOLD}${APPLICATION} LXC Container${CL}"\" >>"$PROFILE_FILE"
-  echo -e "echo -e \"${TAB}${GATEWAY}${YW} Provided by: ${GN}Community-Scripts ORG ${YW}| GitHub: ${GN}https://github.com/Community-Scripts/ProxmoxVE${CL}\"" >>"$PROFILE_FILE"
+  echo -e "echo -e \"${TAB}${GATEWAY}${YW} Provided by: ${GN}community-scripts ORG ${YW}| GitHub: ${GN}https://github.com/community-scripts/ProxmoxVE${CL}\"" >>"$PROFILE_FILE"
   echo "echo \"\"" >>"$PROFILE_FILE"
   cat <<EOF >>"$PROFILE_FILE"
 os_display="Unknown OS"
