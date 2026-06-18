@@ -561,7 +561,7 @@ _send_abort_telemetry() {
   [[ -n "$duration" ]] && payload="${payload},\"duration\":${duration}"
   payload="${payload}}"
 
-  local api_url="${TELEMETRY_URL:-https://telemetry.community-scripts.org/telemetry}"
+  local api_url="${TELEMETRY_URL:-https://telemetry.Community-Scripts.org/telemetry}"
 
   # 2 attempts (retry once on failure) — original had no retry
   local attempt
