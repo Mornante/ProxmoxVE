@@ -2994,7 +2994,7 @@ diagnostics_check() {
 DIAGNOSTICS=${DIAGNOSTICS}
 
 # Mornante Telemetry Configuration
-# https://telemetry.Mornante.org
+# https://telemetry.community-scripts.org
 #
 # This file stores your telemetry preference.
 # Set DIAGNOSTICS=yes to share anonymous installation data.
@@ -3020,7 +3020,7 @@ diagnostics_menu() {
     "Telemetry is currently: ${status_text}\n\n"
     "Anonymous data helps us improve scripts and track issues.\n"
     "No personal data is ever collected.\n\n"
-    "More info: https://telemetry.Mornante.org\n\n"
+    "More info: https://telemetry.community-scripts.org\n\n"
     "Do you want to ${current:+change this setting}?"
   )
 

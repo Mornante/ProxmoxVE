@@ -7,7 +7,7 @@
 # ==============================================================================
 #
 # Provides functions for sending anonymous telemetry data via the community
-# telemetry ingest service at telemetry.Mornante.org.
+# telemetry ingest service at telemetry.community-scripts.org.
 #
 # Features:
 #   - Container/VM creation statistics
@@ -32,7 +32,7 @@
 # ==============================================================================
 # Telemetry Configuration
 # ==============================================================================
-TELEMETRY_URL="https://telemetry.Mornante.org/telemetry"
+TELEMETRY_URL="https://telemetry.community-scripts.org/telemetry"
 
 # Timeout for telemetry requests (seconds)
 # Progress pings (validation/configuring) use the short timeout
@@ -859,7 +859,7 @@ post_progress_to_api() {
   local app_name="${NSAPP:-${app:-unknown}}"
   local telemetry_type="${TELEMETRY_TYPE:-lxc}"
 
-  curl -fsS -m 5 -X POST "${TELEMETRY_URL:-https://telemetry.Mornante.org/telemetry}" \
+  curl -fsS -m 5 -X POST "${TELEMETRY_URL:-https://telemetry.community-scripts.org/telemetry}" \
     -H "Content-Type: application/json" \
     -d "{\"random_id\":\"${RANDOM_UUID}\",\"execution_id\":\"${EXECUTION_ID:-${RANDOM_UUID}}\",\"type\":\"${telemetry_type}\",\"nsapp\":\"${app_name}\",\"status\":\"${progress_status}\"}" &>/dev/null || true
 }
