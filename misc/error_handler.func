@@ -2,9 +2,9 @@
 # ------------------------------------------------------------------------------
 # ERROR HANDLER - ERROR & SIGNAL MANAGEMENT
 # ------------------------------------------------------------------------------
-# Copyright (c) 2021-2026 community-scripts ORG
+# Copyright (c) 2021-2026 Mornante ORG
 # Author: MickLesk (CanbiZ)
-# License: MIT | https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
+# License: MIT | https://github.com/Mornante/ProxmoxVE/raw/main/LICENSE
 # ------------------------------------------------------------------------------
 #
 # Provides comprehensive error handling and signal management for all scripts.
